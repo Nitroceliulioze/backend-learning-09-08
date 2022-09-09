@@ -19,6 +19,10 @@ const drugSchema = new mongoose.Schema({
     },
     pharmacokinetics: {
         type: String,
+    },
+    password: {
+        type: String,
+        required: true,
     }
 })
 
