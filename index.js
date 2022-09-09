@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import userModel from "./userModel.js";
+import drugModel from "./drugModel.js";
 
 const app = express();
 const port = 3001;
@@ -21,8 +21,8 @@ const connectionToDB = async () => {
 
 app.post('/create', async (req, res) => {
     try {
-        const newUser = new userModel(req.body)
-        await newUser.save();
+        const newDrug = new drugModel(req.body)
+        await newDrug.save();
         res.status(201).send('New User is created');
     } catch(error) {
         res.status(405).send(error)
