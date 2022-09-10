@@ -1,5 +1,5 @@
 import express from "express";
-import { createDrug, getAllDrugs, getDrugById, deleteDrugById, updateDrug } from "../controller/drugController.js";
+import { createDrug, getAllDrugs, getDrugById, deleteDrugById, updateDrug, deleteAllDrugs } from "../controller/drugController.js";
 
 
 const router = express.Router();
@@ -13,5 +13,7 @@ router.get('/get/:id', getDrugById);
 router.delete('/delete/:id', deleteDrugById);
 
 router.put('/update/:id', updateDrug);
+
+router.delete('/delete', deleteAllDrugs);
 
 export default router;

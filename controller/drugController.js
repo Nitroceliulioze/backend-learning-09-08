@@ -42,8 +42,17 @@ export const deleteDrugById = async (req,res) => {
 
 export const updateDrug = async (req,res) => {    
     try {
-        const updatedDrug = await drugModel.findByIdAndUpdate(req.params.id, { $set: req.body });
-        res.status(200).json(updateDrug);
+        const updatedDrug = await drugModel.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
+        res.status(200).json(updatedDrug);
+    } catch (error) {
+        console.error('error');
+    }
+};
+
+export const deleteAllDrugs = async (req,res) => {    
+    try {
+        await drugModel.deleteMany(req.params.id);
+        res.status(200).send(`All drugs are deleted`)
     } catch (error) {
         console.error('error');
     }
