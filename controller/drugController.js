@@ -1,10 +1,16 @@
 import drugModel from "../Models/drugModel.js";
+import bcrypt from "bcrypt";
 
 
 
 export const createDrug = async (req, res) => {
     try {
-        const newDrug = new drugModel(req.body)
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(req.body.password, salt);
+        const newDrug = new drugModel({
+            ...req.body,
+            password : hash,
+        });
         await newDrug.save();
         res.status(201).send('New User is created');
     } catch(error) {
@@ -15,7 +21,8 @@ export const createDrug = async (req, res) => {
 
 export const getAllDrugs = async (req,res) => {    
     try {
-        const allDrugs = await drugModel.find();
+        //cleaner way to find
+        const allDrugs = await drugModel.find({}, {password: 0});
         res.status(202).json(allDrugs);
     } catch (error) {
         console.error('error');
@@ -25,7 +32,9 @@ export const getAllDrugs = async (req,res) => {
 export const getDrugById = async (req,res) => {    
     try {
         const drug = await drugModel.findById(req.params.id);
-        res.status(200).json(drug);
+        //destructuring
+        const {password, ...remainingDrugData} = drug._doc;
+        res.status(200).json(remainingDrugData);
     } catch (error) {
         console.error('error');
     }
