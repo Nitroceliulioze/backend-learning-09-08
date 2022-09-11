@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import drugRoute from "./Routes/drugRoute.js";
+import userRoute from "./Routes/userRoute.js";
+import authRoute from "./Routes/authRoute.js";
 
 const app = express();
 const port = 3001;
@@ -19,8 +20,11 @@ const connectionToDB = async () => {
     }
 }
 
-//create 
-app.use('/api', drugRoute)
+
+app.use('/api', userRoute)
+
+//Auth route
+app.use('/api', authRoute)
 
 
 app.listen('3001', () =>{
