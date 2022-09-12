@@ -1,18 +1,18 @@
 import express from "express";
 import { getAllUsers, getUserById, deleteUserById, updateUser, deleteAllUsers } from "../controller/userController.js";
-import { verifySessionTokenAdmin, verifySessionTokenUser } from "../authCheck/authCheck.js";
+import { verifySessionToken } from "../Middleware/authCheck.js";
 
 const router = express.Router();
 
 
-router.get('/get', verifySessionTokenAdmin, getAllUsers);
+router.get('/get', verifySessionToken, getAllUsers);
 
-router.get('/get/:id', verifySessionTokenUser, getUserById);
+router.get('/get/:id', verifySessionToken, getUserById);
 
-router.delete('/delete/:id', verifySessionTokenUser, deleteUserById);
+router.delete('/delete/:id', verifySessionToken, deleteUserById);
 
-router.put('/update/:id', verifySessionTokenUser, updateUser);
+router.put('/update/:id', verifySessionToken, updateUser);
 
-router.delete('/delete', verifySessionTokenAdmin, deleteAllUsers);
+router.delete('/delete', verifySessionToken, deleteAllUsers);
 
 export default router;

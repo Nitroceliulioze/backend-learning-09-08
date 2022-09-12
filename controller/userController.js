@@ -36,6 +36,7 @@ export const updateUser = async (req, res) => {
         req.params.id,
         {
           $set: req.body,
+          isAdmin: req.user.isAdmin ? req.body.isAdmin : false,
         },
         { new: true }
       );

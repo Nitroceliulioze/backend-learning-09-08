@@ -9,6 +9,7 @@ export const createUser = async (req, res) => {
     const newUser = new userModel({
       ...req.body,
       password: hash,
+      isAdmin: false,
     });
     await newUser.save();
     res.status(201).send("New User is created");
@@ -40,7 +41,7 @@ export const loginUser = async (req, res) => {
     //setting a cookie to session var token
     return res
       .cookie("session_token", token, { httpOnly: true })
-      .status(201)
+      .status(200)
       .send(`Successfully logged in`);
   } catch (error) {
     console.error("error");
