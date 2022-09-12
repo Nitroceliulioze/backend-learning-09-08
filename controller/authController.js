@@ -34,7 +34,7 @@ export const loginUser = async (req, res) => {
       return res.status(405).send("Wrong user or password");
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET, {
       expiresIn: "1 day",
     });
     //setting a cookie to session var token

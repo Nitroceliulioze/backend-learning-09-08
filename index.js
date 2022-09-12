@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import userRoute from "./Routes/userRoute.js";
 import authRoute from "./Routes/authRoute.js";
 
@@ -10,6 +11,7 @@ const port = 3001;
 dotenv.config();
 
 app.use(express.json());
+app.use(cookieParser());
 
 const connectionToDB = async () => {
     try {
